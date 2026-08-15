@@ -1,0 +1,68 @@
+{
+  "name": "@crazy_th/dsh-computer-use",
+  "version": "0.1.1",
+  "description": "Native Windows Computer Use tools for DeepSeek Harness.",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src",
+    "tests",
+    "scripts/windows-driver.ps1",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "tsconfig.json",
+    "tsconfig.validation.json",
+    "tsup.config.ts"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepare": "pnpm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.validation.json"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "computer-use",
+    "windows"
+  ],
+  "license": "MIT",
+  "author": "crazy_th",
+  "homepage": "https://github.com/ThreeBody6666/dsh-computer-use#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThreeBody6666/dsh-computer-use.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThreeBody6666/dsh-computer-use/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-attachment": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-settings": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "@types/node": "^24.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

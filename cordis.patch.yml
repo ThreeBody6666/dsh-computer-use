@@ -1,0 +1,8 @@
+- insert:
+    - id: computer-use
+      name: '@crazy_th/dsh-computer-use'
+      config:
+        requireApproval: true
+        actionDelayMs: 80
+        maxScreenshotWidth: 1600
+        maxScreenshotHeight: 1200
