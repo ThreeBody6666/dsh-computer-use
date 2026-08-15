@@ -1,6 +1,6 @@
 {
   "name": "@crazy_th/dsh-computer-use",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Native Windows Computer Use tools for DeepSeek Harness.",
   "type": "module",
   "main": "dist/index.js",
@@ -64,8 +64,7 @@
       "inject": [
         "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-connection",
-        "@deepseek-ai/dsh-client-ui-settings",
-        "@deepseek-ai/dsh-api-remotes"
+        "@deepseek-ai/dsh-client-ui-settings"
       ],
       "platform": "web"
     }
