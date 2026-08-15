@@ -22,24 +22,20 @@ API Key 使用 DSH Settings 的 secret 字段保存，不写入 Cordis 配置或
 
 ## 安装
 
-从 npm 安装（推荐）：
+从 npm 安装（推荐）。`--profile` 为必填参数，用于指定装入哪个 DSH profile：
 
 ```powershell
-dsh plugin add @crazy_th/dsh-computer-use
+dsh plugin --profile web add @crazy_th/dsh-computer-use
 ```
 
-> 默认安装到当前 profile。如需指定 profile（例如 web GUI），追加 `--profile <名称>`：
->
-> ```powershell
-> dsh plugin --profile web add @crazy_th/dsh-computer-use
-> ```
+把 `web` 换成你实际使用的 profile（`tui`、`headless` 等）。
 
 从源码安装（开发调试）：
 
 ```powershell
 pnpm install
 pnpm run build
-dsh plugin add link:<本仓库路径>
+dsh plugin --profile web add link:<本仓库路径>
 ```
 
 重启 DSH 后可检查已加载层：
