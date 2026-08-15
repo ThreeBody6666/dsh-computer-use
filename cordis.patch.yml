@@ -1,6 +1,9 @@
 - insert:
-    - id: computer-use
+    - id: computer-use-settings
       name: '@crazy_th/dsh-computer-use'
+      config: {}
+    - id: computer-use
+      name: '@crazy_th/dsh-computer-use/tools'
       config:
         requireApproval: true
         actionDelayMs: 80

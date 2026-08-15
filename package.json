@@ -1,6 +1,6 @@
 {
   "name": "@crazy_th/dsh-computer-use",
-  "version": "0.1.7",
+  "version": "0.2.1",
   "description": "Native Windows Computer Use tools for DeepSeek Harness.",
   "type": "module",
   "main": "dist/index.js",
@@ -10,6 +10,9 @@
     },
     "./client": {
       "default": "./lib/client.js"
+    },
+    "./tools": {
+      "default": "./dist/tools.js"
     },
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
@@ -64,7 +67,8 @@
       "inject": [
         "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-connection",
-        "@deepseek-ai/dsh-client-ui-settings"
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
       ],
       "platform": "web"
     }
@@ -72,6 +76,7 @@
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
     "@deepseek-ai/dsh-attachment": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.6",
     "@deepseek-ai/dsh-settings": "^0.1.0-rc.6",
     "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
   },
@@ -80,6 +85,7 @@
   },
   "devDependencies": {
     "@deepseek-ai/schemastery": "^3.18.1",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.6",
     "@types/node": "^24.0.0",
     "tsup": "^8.5.0",
     "typescript": "^5.9.0",

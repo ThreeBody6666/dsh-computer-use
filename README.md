@@ -16,9 +16,23 @@ Every Computer Use tool asks through DSH's native approval service by default. `
 
 ## Vision model settings
 
-After installing and restarting DSH, open **Settings** and select the `computer-use-vision` section. Enter an OpenAI-compatible HTTPS base URL, API key, vision-capable model name, and response-token limit, then enable the model. The API key is stored in DSH's settings secret field and is not included in Cordis configuration or tool responses.
+After installing and restarting DSH, open **Settings > Plugins > Plugin configuration**, then expand **Computer Use Vision**. Enter an OpenAI-compatible HTTPS base URL, API key, vision-capable model name, and response-token limit, then enable the model. The API key is stored in DSH's settings secret field and is not included in Cordis configuration or tool responses.
+
+| Field | Requirement |
+| --- | --- |
+| Enabled | Turn this on only after the endpoint, key, and model are configured. |
+| Base URL | An HTTPS OpenAI-compatible API base URL, such as `https://api.example.com/v1`. |
+| API Key | Stored as a write-only DSH secret. Leaving the field blank during an update preserves the existing key. |
+| Model | The vision-capable model identifier accepted by the provider. |
+| Max Tokens | An integer from `64` to `8192`; the default is `1000`. |
 
 `computer_observe` sends the current screenshot only to this configured endpoint. Keep it disabled unless you understand where the visual data will be processed.
+
+![Computer Use Vision settings card](assets/computer-use-vision-settings.png)
+
+### Why this appears in the settings UI
+
+DSH only exposes selected settings namespaces to its browser configuration API. The plugin registers the vision configuration as a configurable model provider, so the native Web UI can safely read and save it. Computer-control tools are loaded separately, preventing their runtime dependencies from delaying the settings card.
 
 ## Install
 
@@ -45,6 +59,23 @@ dsh --profile web --dump-config
 ```
 
 The bundled `cordis.patch.yml` enables approval and scales screenshots to at most 1600x1200. Override those values in the profile's `cordis.patch.yml` when needed.
+
+### Verify the installation
+
+The composed configuration must contain both `computer-use-settings` and `computer-use`:
+
+```powershell
+dsh --profile web --dump-config
+```
+
+For the Web profile, start DSH on the default local port and open the page locally:
+
+```powershell
+dsh web --port 3082
+# Open http://127.0.0.1:3082, then Settings > Plugins > Plugin configuration.
+```
+
+If the card is absent, restart DSH after rebuilding or reinstalling the plugin. Do not use a cached page from a different DSH instance or profile.
 
 ## Development
 
