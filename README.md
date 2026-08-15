@@ -22,24 +22,20 @@ After installing and restarting DSH, open **Settings** and select the `computer-
 
 ## Install
 
-From npm (recommended):
+From npm (recommended). `--profile` is required — it selects which DSH profile gets the plugin:
 
 ```powershell
-dsh plugin add @crazy_th/dsh-computer-use
+dsh plugin --profile web add @crazy_th/dsh-computer-use
 ```
 
-> Installs into your current profile. To target a specific profile (e.g. the web GUI), append `--profile <name>`:
->
-> ```powershell
-> dsh plugin --profile web add @crazy_th/dsh-computer-use
-> ```
+Replace `web` with the profile you actually use (`tui`, `headless`, ...).
 
 From source (development):
 
 ```powershell
 pnpm install
 pnpm run build
-dsh plugin add link:<path-to-this-checkout>
+dsh plugin --profile web add link:<path-to-this-checkout>
 ```
 
 Restart DSH after installation. To inspect the active layer:
