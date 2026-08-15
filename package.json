@@ -1,6 +1,6 @@
 {
   "name": "@crazy_th/dsh-computer-use",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Native Windows Computer Use tools for DeepSeek Harness.",
   "type": "module",
   "main": "dist/index.js",
@@ -11,6 +11,7 @@
     "scripts/windows-driver.ps1",
     "cordis.patch.yml",
     "README.md",
+    "README.zh-CN.md",
     "LICENSE",
     "tsconfig.json",
     "tsconfig.validation.json",

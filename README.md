@@ -1,5 +1,7 @@
 # DSH Computer Use
 
+[中文](README.zh-CN.md)
+
 Native Windows Computer Use bundle for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It uses the DSH Cordis tool registry directly and does not use MCP. The current compatibility target is DSH `0.1.0-rc.6`.
 
 ## Capabilities
