@@ -29,5 +29,19 @@ export function apply(ctx: Context): void {
       settingsPath: [],
       declared: false,
     }])
+    // Master switch for the computer_* tools themselves. Exposed to the Web GUI
+    // the same way (configurable model provider) so the composer switch and the
+    // settings card can read and write it.
+    const controlNamespace = settingsNamespace('computer-use-control')
+    services.settings.register(controlNamespace, Schema.object({
+      enabled: Schema.boolean().default(true),
+    }), { applies: 'live' })
+    services.llm.registerConfigurableProviders([{
+      provider: 'computer-use-control',
+      displayName: 'Computer Use',
+      settingsNs: controlNamespace,
+      settingsPath: [],
+      declared: false,
+    }])
   })
 }

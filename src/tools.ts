@@ -28,6 +28,20 @@ function actionNames(action: string): string {
   return action.replace('computer_', '').replaceAll('_', ' ')
 }
 
+/** Read the computer-use master switch (undefined or missing => enabled). */
+function isEnabled(ctx: Context): boolean {
+  const control = ctx.settings.get(settingsNamespace('computer-use-control')) as { enabled?: boolean } | undefined
+  return control === undefined || control.enabled !== false
+}
+
+function addEnabledGate(ctx: Context): void {
+  ctx.on('tools/pre-execute', async (execution, next) => {
+    if (!execution.name.startsWith('computer_')) return next()
+    if (isEnabled(ctx)) return next()
+    return { kind: 'deny', reason: 'Computer Use is disabled (turn it back on from the composer switch or the plugin settings).' }
+  })
+}
+
 function addApprovalGate(ctx: Context, config: Config): void {
   if (!config.requireApproval) return
   ctx.on('tools/pre-execute', async (execution, next) => {
@@ -44,6 +58,7 @@ export function apply(ctx: Context, config: Config): void {
     || config.maxScreenshotWidth < 320 || config.maxScreenshotHeight < 240) {
     throw new Error('Screenshot dimensions must be integers of at least 320x240')
   }
+  addEnabledGate(ctx)
   addApprovalGate(ctx, config)
   const visionSettings = {
     get(): VisionSettings {
