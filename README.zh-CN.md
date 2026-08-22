@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的原生 Windows Computer Use 插件。它直接注册到 DSH 的 Cordis 工具体系，不使用 MCP。当前兼容目标为 DSH `0.1.0-rc.6`。
+面向 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的原生 Windows Computer Use 插件。它直接注册到 DSH 的 Cordis 工具体系，不使用 MCP。已在 DSH `0.1.1-rc.1` 上实测兼容。
 
 ## 功能
 
@@ -13,6 +13,15 @@
 - `computer_wait`：等待应用界面更新后再进行观察。
 
 所有 Computer Use 工具默认通过 DSH 原生审批服务请求许可。插件会在发送输入前拒绝 `CTRL+ALT+DELETE`、空文本、不支持的按键、无效时长及虚拟桌面范围外的坐标。
+
+## 权限与审批
+
+> **如果某个 `computer_*` 工具返回 `the user rejected tool "computer_screenshot"` 且没有任何确认弹窗**：这通常**不是**真实的用户拒绝。当会话运行在 `approval: never`（例如 `danger-full-access` 预设）下时，需要审批的工具会被 **fail-closed 自动拒绝**，报错文案具有误导性。在会话输入框输入 `/permission workspace-write`（approval=ask）即可恢复审批弹窗。
+
+每个电脑操作受到两道相互独立的门控制：
+
+- **主开关**（自 0.2.2）：输入框右侧的 **Computer Use: On/Off** 开关切换 `computer-use-control` 设置。关闭后所有 `computer_*` 工具都会被明确拒绝。
+- **审批门**：`requireApproval` 为 `true` 时（内置 `cordis.patch.yml` 默认开启），`tools/pre-execute` 会对每次 `computer_*` 调用发起 `ask` 审批请求。只有在你接受"电脑操作无需确认"时才应关闭；修改后需要重启 DSH 生效。
 
 ## 视觉模型设置
 

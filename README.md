@@ -2,7 +2,7 @@
 
 [中文](README.zh-CN.md)
 
-Native Windows Computer Use bundle for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It uses the DSH Cordis tool registry directly and does not use MCP. The current compatibility target is DSH `0.1.0-rc.6`.
+Native Windows Computer Use bundle for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It uses the DSH Cordis tool registry directly and does not use MCP. Verified against DSH `0.1.1-rc.1`.
 
 ## Capabilities
 
@@ -13,6 +13,15 @@ Native Windows Computer Use bundle for [DeepSeek Harness](https://github.com/dee
 - `computer_observe`: captures the desktop and sends it to a user-selected vision model when the active DSH model cannot inspect images.
 
 Every Computer Use tool asks through DSH's native approval service by default. `CTRL+ALT+DELETE`, empty text, unsupported keys, invalid durations, and coordinates outside the virtual desktop are rejected before input is sent.
+
+## Permissions and approvals
+
+> **If a `computer_*` tool reports `the user rejected tool "computer_screenshot"` without any prompt:** this usually is *not* a real user refusal. When the session runs under `approval: never` (for example a `danger-full-access` preset), approval-required tools are **fail-closed and auto-rejected**, and the error text is misleading. Type `/permission workspace-write` (approval = ask) in the conversation input box to restore the approval prompts.
+
+Two independent gates guard every computer action:
+
+- **Master switch** (since 0.2.2): the **Computer Use: On/Off** pill on the right side of the composer toggles the `computer-use-control` setting. When disabled, all `computer_*` tools are denied with an explicit reason.
+- **Approval gate**: `tools/pre-execute` returns an `ask` request for every `computer_*` call while `requireApproval` is `true` (the bundled `cordis.patch.yml` keeps it enabled). Turn it off only if you accept running computer actions without confirmation; changing it requires a DSH restart.
 
 ## Vision model settings
 
